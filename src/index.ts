@@ -1,8 +1,9 @@
-import { getData, IWeatherData, IWeatherError } from "./weatherData";
+import { getData,} from "./getWeatherData";
+import { IWeather, IWeatherError } from "./mainInterfaces";
 
 const result = getData("Jaén");
 
-result.then((fulfilled: IWeatherData | IWeatherError) => {
+result.then((fulfilled: IWeather | IWeatherError) => {
 	if (typeof fulfilled === "object" && "error" in fulfilled) {
 		console.log("Location does not exist");
 		return;
