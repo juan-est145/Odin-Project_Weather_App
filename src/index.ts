@@ -5,7 +5,7 @@ const result = getData("Jaén");
 
 result.then((fulfilled: IWeather | IWeatherError) => {
 	if (typeof fulfilled === "object" && "error" in fulfilled) {
-		console.log("Location does not exist");
+		alert("Could not find location, try again");
 		return;
 	}
 	console.log(fulfilled);
