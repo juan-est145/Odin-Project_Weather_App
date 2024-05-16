@@ -8,7 +8,9 @@ result.then((fulfilled: IWeather | IWeatherError) => {
 		alert("Could not find location, try again");
 		return;
 	}
-	console.log(fulfilled);
-	console.log(fulfilled.location.name);
-	console.log(fulfilled.current.condition.text);
+	console.log(`The time in ${fulfilled.location.name}, is of ${fulfilled.current.temp_c} ºC`);
+	console.log(`The conditon is expected to be ${fulfilled.current.condition.text}`);
+	console.log(`${fulfilled.forecast.forecastday.forEach(day =>{
+		console.log(`For ${day.date}, the average temperature will be ${day.day.avgtemp_c}`);
+	})}`);
 });
