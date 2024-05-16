@@ -1,6 +1,7 @@
-export async function getData(): Promise<IWeatherData> {
+export async function getData(location: string): Promise<IWeatherData> {
 	try {
-		const response: Response = await fetch("https://api.weatherapi.com/v1/current.json?key=e7ced9d94cd541f5a8e184800241405&q=jaen", { mode: 'cors' });
+		const key: string = "e7ced9d94cd541f5a8e184800241405";
+		const response: Response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${key}&q=${location}`, { mode: 'cors' });
 		const weatherData: IWeatherData = await response.json();
 		return (weatherData);
 	}
@@ -9,7 +10,7 @@ export async function getData(): Promise<IWeatherData> {
 	}
 }
 
-export interface IWeatherData {
+export interface IWeatherData extends Object {
 	location: ILocation,
 	current: ICurrent
 }
