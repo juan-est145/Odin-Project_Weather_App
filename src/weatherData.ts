@@ -1,4 +1,4 @@
-export async function getData(location: string): Promise<IWeatherData> {
+export async function getData(location: string): Promise<Object> {
 	try {
 		const key: string = "e7ced9d94cd541f5a8e184800241405";
 		const response: Response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${key}&q=${location}`, { mode: 'cors' });
@@ -13,6 +13,10 @@ export async function getData(location: string): Promise<IWeatherData> {
 export interface IWeatherData extends Object {
 	location: ILocation,
 	current: ICurrent
+}
+
+export interface IWeatherError extends Object{
+	error: IError
 }
 
 interface ILocation {
@@ -32,7 +36,7 @@ interface ICurrent {
 	temp_c: number,
 	temp_f: number,
 	is_day: number,
-	condition : ICondition,
+	condition: ICondition,
 	wind_mph: number,
 	wind_kph: number,
 	wind_degree: null,
@@ -56,5 +60,10 @@ interface ICondition {
 	text: string,
 	icon: string,
 	code: number
+}
+
+interface IError{
+	code: number,
+	message: string
 }
 
