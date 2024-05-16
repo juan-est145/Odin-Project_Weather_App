@@ -1,5 +1,6 @@
 import { getData,} from "./getWeatherData";
 import { IWeather, IWeatherError } from "./mainInterfaces";
+import "./style.css"
 
 const result = getData("Sevilla");
 
