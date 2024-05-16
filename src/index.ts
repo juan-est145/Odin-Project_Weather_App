@@ -9,8 +9,3 @@ result.then((fullfilled: IWeatherData) =>
 	console.log(fullfilled.location.name);
 	console.log(fullfilled.current.condition.text);
 });
-
-
-/*result.then(data => {
-	console.log(data.location);
-});*/
