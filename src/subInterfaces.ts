@@ -35,6 +35,7 @@ interface IDayData {
 	mintemp_f: number,
 	avgtemp_c: number,
     avgtemp_f: number,
+	condition: IWeatherCondition
 }
 
 export interface IError {

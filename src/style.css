@@ -83,23 +83,29 @@ svg {
 	text-align: center;
 }
 
-#main-card {
+.card {
 	background: var(--cards-background);
 	border-radius: 1em;
 	display: flex;
 	flex-direction: column;
+	padding: 1em;
 }
 
-#main-card > div {
+.card > div {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-#main-card > div span {
+.card > div span {
 	font-size: 1.6rem;
 }
 
-#main-card > span {
+.card > span {
 	margin: 5px;
+}
+
+#forecast-cards {
+	display: flex;
+	gap: 2em;
 }
