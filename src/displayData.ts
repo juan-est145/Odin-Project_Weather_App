@@ -5,6 +5,7 @@ export function displayData(data: IWeather): void {
 	while (weatherDisplay.firstChild != null)
 		weatherDisplay.removeChild(weatherDisplay.firstChild);
 	createCurrentTimeCard(data);
+	createForecastTimeCard(data);
 }
 
 function createCurrentTimeCard(data: IWeather): void {
@@ -12,11 +13,11 @@ function createCurrentTimeCard(data: IWeather): void {
 	const card: HTMLElement = document.createElement("div");
 	const header: HTMLElement = document.createElement("div");
 	const city: HTMLElement = document.createElement("h4");
-	const celsiusInfo = document.createElement("div");
-	const weatherImage = document.createElement("img");
-	const celsiusDegrees = document.createElement("span");
-	const timeDescriptionSpan = document.createElement("span");
-	const sensationSpan = document.createElement("span");
+	const celsiusInfo: HTMLElement = document.createElement("div");
+	const weatherImage: HTMLImageElement = document.createElement("img");
+	const celsiusDegrees: HTMLElement = document.createElement("span");
+	const timeDescriptionSpan: HTMLElement = document.createElement("span");
+	const sensationSpan: HTMLElement = document.createElement("span");
 
 	city.textContent = `${data.location.name}, ${data.location.region}, ${data.location.country}`;
 	weatherImage.src = data.current.condition.icon;
@@ -34,6 +35,44 @@ function createCurrentTimeCard(data: IWeather): void {
 	card.appendChild(timeDescriptionSpan);
 	card.appendChild(sensationSpan);
 	weatherDisplay.appendChild(card);
+}
+
+function createForecastTimeCard(data: IWeather): void {
+	const weatherDisplay: HTMLElement = document.querySelector("#weather");
+	const headerTitle: HTMLElement = document.createElement("h2");
+	const forecastCards: HTMLElement = document.createElement("div");
+
+	headerTitle.textContent = "Forecast";
+	forecastCards.id = "forecast-cards";
+	for (let i: number = 1; i < 3; i++) {
+		const card: HTMLElement = document.createElement("div");
+		const date: HTMLElement = document.createElement("h4");
+		const celsiusInfo: HTMLElement = document.createElement("div");
+		const timeImage: HTMLImageElement = document.createElement("img");
+		const timeDescriptionSpan: HTMLElement = document.createElement("span");
+		const maxTemp: HTMLElement = document.createElement("span");
+		const minTemp: HTMLElement = document.createElement("span");
+		const avgTemp: HTMLElement = document.createElement("span");
+
+		card.classList.add("card");
+		date.textContent = data.forecast.forecastday[i].date;
+		timeImage.src = data.forecast.forecastday[i].day.condition.icon;
+		timeDescriptionSpan.textContent = data.forecast.forecastday[i].day.condition.text;
+		maxTemp.textContent = `Max of ${data.forecast.forecastday[i].day.maxtemp_c.toString()} ºC`;
+		minTemp.textContent = `Min of ${data.forecast.forecastday[i].day.mintemp_c.toString()} ºC`;
+		avgTemp.textContent = `Average of ${data.forecast.forecastday[i].day.avgtemp_c.toString()} ºC`;
+
+		card.appendChild(date);
+		card.appendChild(celsiusInfo);
+		celsiusInfo.appendChild(timeImage);
+		celsiusInfo.appendChild(timeDescriptionSpan);
+		card.appendChild(maxTemp);
+		card.appendChild(minTemp);
+		card.appendChild(avgTemp);
+		forecastCards.appendChild(card);
+	}
+	weatherDisplay.appendChild(headerTitle);
+	weatherDisplay.appendChild(forecastCards);
 }
 
 function createSvg(): SVGSVGElement {
