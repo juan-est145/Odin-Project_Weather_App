@@ -10,19 +10,33 @@ export function displayData(data: IWeather): void {
 function createCurrentTimeCard(data: IWeather): void {
 	const weatherDisplay: HTMLElement = document.querySelector("#weather");
 	const card: HTMLElement = document.createElement("div");
-	const header : HTMLElement = document.createElement("div");
-	const city : HTMLElement = document.createElement("h4");
+	const header: HTMLElement = document.createElement("div");
+	const city: HTMLElement = document.createElement("h4");
+	const celsiusInfo = document.createElement("div");
+	const weatherImage = document.createElement("img");
+	const celsiusDegrees = document.createElement("span");
+	const timeDescriptionSpan = document.createElement("span");
+	const sensationSpan = document.createElement("span");
 
 	city.textContent = `${data.location.name}, ${data.location.region}, ${data.location.country}`;
+	weatherImage.src = data.current.condition.icon;
+	celsiusDegrees.textContent = `${data.current.temp_c.toString()} ºC`;
+	timeDescriptionSpan.textContent = data.current.condition.text;
+	sensationSpan.textContent = `Feels like ${data.current.feelslike_c.toString()} ºC`;
 
 	card.classList.add("card");
-	card.append(header);
-	header.append(createSvg());
-	header.append(city);
+	card.appendChild(header);
+	header.appendChild(createSvg());
+	header.appendChild(city);
+	card.appendChild(celsiusInfo);
+	celsiusInfo.appendChild(weatherImage);
+	celsiusInfo.appendChild(celsiusDegrees);
+	card.appendChild(timeDescriptionSpan);
+	card.appendChild(sensationSpan);
 	weatherDisplay.appendChild(card);
 }
 
-function createSvg() : SVGSVGElement {
+function createSvg(): SVGSVGElement {
 	let svg: SVGSVGElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 	svg.setAttribute("viewBox", "0 0 24 24");
 	svg.setAttribute("fill", "none");

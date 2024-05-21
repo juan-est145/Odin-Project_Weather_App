@@ -21,7 +21,7 @@ async function getData(location: string): Promise<IWeather | IWeatherError> {
 	try {
 		const key: string = "e7ced9d94cd541f5a8e184800241405";
 		const response: Response = await fetch(
-			`https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${location}&lang=ar&days=3&aqi=no&alerts=no&hour=9`
+			`https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${location}&days=3&aqi=no&alerts=no&hour=9`
 			, { mode: 'cors' }
 		)
 		const weatherData: IWeather | IWeatherError = await response.json();
