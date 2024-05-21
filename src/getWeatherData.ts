@@ -1,19 +1,16 @@
 import { IWeather, IWeatherError } from "./mainInterfaces";
 import { displayData } from "./displayData";
 
-export async function sendCityInfo() {
-	const searchBar: HTMLInputElement = document.querySelector("#search-bar");
-	const result: IWeather | IWeatherError = await getData(searchBar.value);
+export async function sendCityInfo(city: string) {
+	const result: IWeather | IWeatherError = await getData(city);
 	if (typeof result === "object" && "error" in result) {
 		alert("Could not find location, try again");
 		return;
 	}
 	displayData(result);
-	/*console.log(`The time in ${result.location.name} is ${result.current.temp_c} ºC`);
-	console.log(`The conditon is expected to be ${result.current.condition.text}`);
-	console.log(`${result.forecast.forecastday.forEach(day => {
-		console.log(`For ${day.date}, the average temperature will be ${day.day.avgtemp_c}`);
-	})}`);*/
+	if (localStorage.getItem("search"))
+		localStorage.removeItem("search");
+	localStorage.setItem("search", city);
 }
 
 
